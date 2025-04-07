@@ -1,0 +1,13 @@
+describe "nombreDelDescribe"{
+    test "nombreDelTest"{
+        
+        llamar  los metodos de orden que necesito para el testo -- ESCENARIO --
+    
+        assert.equals(loQueEspero(valor esperado),loQueTesteo(lo que resulta de la consulta))
+    }
+}
+
+assert.that(consulta) para testear los booleanos
+assert.notThat (consulta) para las negaciones 
+
+assert.throwsException({}) entre llaves lo que tiene que fallar

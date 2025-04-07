@@ -3,13 +3,45 @@ import pepita.*
 describe "Pepita, Pepon y Roque"{
 
     test "La energia inicial de Pepon es 30"{
+        
 
-        assert.fail("IMPLEMENTAR EL TEST!")
+        assert.equals(30,pepon.energia())
     }
 
     test "Pepon al comer alpiste queda con energia en 40"{
 
-        assert.fail("IMPLEMENTAR EL TEST!")
+        pepon.comer(alpiste)
+
+        assert.equals(40, pepon.energia())
+    }
+
+    test "pepon puede volar 4 km"{
+
+    assert.that(pepon.puedeVolar(4))
+
+    }
+
+    test "pepon no puede volar 6 km"{
+
+        assert.notThat((pepon.puedeVolar(6)))
+    }
+
+    test "pepon quiere volar 100 km pero no puede"{
+
+        assert.throwsException({ pepon.volar(100) })
+    }
+
+    test "pepita puede volar 4 km" {
+
+        assert.that(pepita.puedeVolar(4))
+    }
+
+    test "pepita quiere volar 100 km pero no puede "{
+
+        assert.throwsException({ pepita.volar(100) })
     }
 
 }
+
+//nombreDelArchivoTest.wtest para nombrar el archivo de los test
+//importar los archivos para podes probar los test import nombreDelArchivo.* (* para importar todos los obj)
