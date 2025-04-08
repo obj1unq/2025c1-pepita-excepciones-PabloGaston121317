@@ -6,7 +6,26 @@ object pepita {
 	}
 	
 	method volar(distancia) {
-		energia = energia - 10 - distancia
+		self.validarVolar(distancia)
+		energia -= self.energiaParaVolar(distancia)
+	}
+
+	method validarVolar(distancia){
+		if(! self.puedeVolar(distancia)){
+			self.error("no tengo suficiente energia para poder volar")
+		}
+	}
+
+	method validarComer(comida){}
+
+	method puedeVolar(distancia){
+
+		return energia > self.energiaParaVolar(distancia)
+	}
+
+	method energiaParaVolar(distancia){
+
+		return 10 + distancia
 	}
 		
 	method energia() {
@@ -44,24 +63,60 @@ object manzana {
 
 object pepon {
 	var energia = 30
+	var ultimaComida = manzana
 	
 	method energia() {
 		return energia
 	}
 		
 	method comer(comida) {
-		energia += energia + comida.energiaQueAporta() / 2
+		self.validarComer(comida)
+		ultimaComida = comida
+		energia += 	comida.energiaQueAporta() / 2
+		
+	}
+
+	method validarComer(comida){
+		
+		if(! self.puedeComer(comida)){
+			self.error("no quiero repetir la misma comida, soy delicado")
+		}
+	}
+
+	method puedeComer(comida){
+
+		return ultimaComida != comida
 	}
 		
 	method volar(distancia) {
-		energia = energia - 20 - 2*distancia
+		self.validarVolar(distancia)
+		energia -= self.energiaParaVolar(distancia)
+	}
+
+	method validarVolar(distancia){
+
+		if( not self.puedeVolar(distancia)){
+			self.error("No Tengo Suficiente energia para volar")
+		}
+	}
+
+	method puedeVolar(distancia){
+
+		return energia > self.energiaParaVolar(distancia)
+	}
+
+	method energiaParaVolar(distancia) = 20 + (2*distancia)
+
+	method ultimaComida(){
+
+		return ultimaComida
 	}
 	
 }
 
 object roque {
 	var ave = pepita
-	var cenas = 0;
+	var cenas = 0
 	
 	method ave(_ave) {
 		ave = _ave
@@ -72,5 +127,20 @@ object roque {
 		ave.comer(alimento)
 		cenas = cenas + 1
 	}
+
+	method cenas(){
+
+		return cenas
+	}
+
+	method ave() = ave
 }
+
+// responsabilidades 
+
+// self.error ("mensaje")
+
+//method <nombreMensaje> (){} 1. self validar() 2. logica de negocio
+
+
 
