@@ -16,6 +16,8 @@ object pepita {
 		}
 	}
 
+	method validarComer(comida){}
+
 	method puedeVolar(distancia){
 
 		return energia > self.energiaParaVolar(distancia)
@@ -61,13 +63,29 @@ object manzana {
 
 object pepon {
 	var energia = 30
+	var ultimaComida = manzana
 	
 	method energia() {
 		return energia
 	}
 		
 	method comer(comida) {
+		self.validarComer(comida)
+		ultimaComida = comida
 		energia += 	comida.energiaQueAporta() / 2
+		
+	}
+
+	method validarComer(comida){
+		
+		if(! self.puedeComer(comida)){
+			self.error("no quiero repetir la misma comida, soy delicado")
+		}
+	}
+
+	method puedeComer(comida){
+
+		return ultimaComida != comida
 	}
 		
 	method volar(distancia) {
@@ -88,6 +106,11 @@ object pepon {
 	}
 
 	method energiaParaVolar(distancia) = 20 + (2*distancia)
+
+	method ultimaComida(){
+
+		return ultimaComida
+	}
 	
 }
 
@@ -104,6 +127,13 @@ object roque {
 		ave.comer(alimento)
 		cenas = cenas + 1
 	}
+
+	method cenas(){
+
+		return cenas
+	}
+
+	method ave() = ave
 }
 
 // responsabilidades 

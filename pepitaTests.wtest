@@ -41,6 +41,65 @@ describe "Pepita, Pepon y Roque"{
         assert.throwsException({ pepita.volar(100) })
     }
 
+    test "lo ultimo que comio pepon es una manzana"{
+
+        assert.equals(manzana, pepon.ultimaComida())
+    }
+
+    test "pepon come alpiste luego de haber comida una manzana, dejando su energia en 40" {
+        pepon.comer(alpiste)
+
+        assert.equals(40, pepon.energia())
+    }
+
+    test "Pepon come alpiste luego de haber comido una manzana , luego quiere volver a comer otro alpiste pero no puede"{
+
+        pepon.comer(alpiste)
+        assert.throwsException({ pepon.comer(alpiste) })
+        
+    }
+
+    test "pepon come una manzana luego de comer un alpiste" {
+
+        pepon.comer(alpiste)
+        pepon.comer(manzana)
+        assert.equals(manzana, pepon.ultimaComida())
+    }
+
+    test "pepon come un alpiste , luego  puede comer una manzana pero no puede comer  alpiste " {
+
+        pepon.comer(alpiste)
+
+        assert.notThat(pepon.puedeComer(alpiste))
+        assert.that(pepon.puedeComer(manzana))
+        
+    }
+
+    test "roque tiene como ave para entrenar a pepon" {
+
+        roque.ave(pepon)
+
+        assert.equals(pepon, roque.ave())
+    }
+
+    test "roque alimenta a pepon  con alpiste, las  cenas aumentan a 1 "{
+
+        roque.ave(pepon)
+        roque.alimentar(alpiste)
+
+        assert.equals(1, roque.cenas())
+    }
+
+    test "roque quiere alimentar a pepon 2  veces con alpiste pero no puede , las cenas  quedan en 1 " {
+
+        roque.ave(pepon)
+        roque.alimentar(alpiste)
+        
+        assert.throwsException({ roque.alimentar(alpiste) })
+
+        
+    }
+
 }
 
 //nombreDelArchivoTest.wtest para nombrar el archivo de los test
